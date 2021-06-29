@@ -24,6 +24,24 @@
   </a>
 </h3>
 
+
+## Table of Contents
+
+-   [What is Draco?](#what-is-draco)
+-   [Terminology](#terminology)
+-   [Why use Draco?](#why-use-draco)
+-   [Draco place in FIWARE architecture](#draco-place-in-fiware-architecture)
+-   [How to Deploy?](#how-to-deploy)
+-   [Usage: Overview](#usage-overview)
+-   [Training Courses](#training-courses)
+-   [Testing](#testing)
+-   [Quality Assurance](#quality-assurance)
+-   [Roadmap](#roadmap)
+-   [Maintainers](#maintainers)
+-   [Licensing](#licensing)
+-   [Reporting issues and contact information](#reporting-issues-and-contact-information)
+
+
 ## How to Deploy?
 
 The most easy way to deploy Draco is running the container available on DockerHub.
