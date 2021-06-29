@@ -6,6 +6,7 @@
   <br>
 </h1>
 
+[[/docs/images/myimage.jpg]]
 
 <p align="center">
   <a href="mailto:info@dataspace-connector.de">Contact</a> •
