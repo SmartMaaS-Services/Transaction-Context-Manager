@@ -24,23 +24,182 @@
   </a>
 </h3>
 
+<details>
+<summary><strong>Table of Contents</strong></summary>
 
-## Table of Contents
+- [Smart-Platform-Services (Slim Starter)](#smart-platform-services-slim-starter)
+	- [Content](#content)
+	- [Prerequisites](#prerequisites)
+		- [Technical requirements](#technical-requirements)
+		- [Maxmind license](#maxmind-license)
+		- [PayPal account](#paypal-account)
+	- [Deployment](#deployment)
+		- [Preperation of VM](#preperation-of-vm)
+		- [Clone the project files](#clone-the-project-files)
+		- [Setup script #1](#setup-script-1)
+		- [Setup first Umbrella users](#setup-first-umbrella-users)
+		- [Setup script #2](#setup-script-2)
+	- [Configuration](#configuration)
+		- [Configure Keyrock (Identity Manager)](#configure-keyrock-identity-manager)
+			- [Change admin user credentials](#change-admin-user-credentials)
+			- [Create a standard user](#create-a-standard-user)
+			- [Organizations and applications](#organizations-and-applications)
+			- [Roles and permissions](#roles-and-permissions)
+				- [Standard roles](#standard-roles)
+				- [Custom roles](#custom-roles)
+				- [Create role](#create-role)
+				- [Create permission](#create-permission)
+				- [Assign permission to role](#assign-permission-to-role)
+				- [Assign role to user](#assign-role-to-user)
 
--   [What is Draco?](#what-is-draco)
--   [Terminology](#terminology)
--   [Why use Draco?](#why-use-draco)
--   [Draco place in FIWARE architecture](#draco-place-in-fiware-architecture)
--   [How to Deploy?](#how-to-deploy)
--   [Usage: Overview](#usage-overview)
--   [Training Courses](#training-courses)
--   [Testing](#testing)
--   [Quality Assurance](#quality-assurance)
--   [Roadmap](#roadmap)
--   [Maintainers](#maintainers)
--   [Licensing](#licensing)
--   [Reporting issues and contact information](#reporting-issues-and-contact-information)
+</details>
 
+
+```
+<key>|<value>|<key>|<value>|<key>|<value> etc..
+```
+
+-   `i` (device ID): Device ID (unique for the API Key).
+-   `k` (API Key): API Key for the service the device is registered on.
+-   `t` (timestamp): Timestamp of the measure. Will override the automatic IoT Agent timestamp (optional).
+-   `d` (Data): Ultralight 2.0 payload.
+
+The `i` and `k` parameters are mandatory.
+
+> <b><i>NOTE:</i></b> This project is a forked and revised "slim starter" version of the original project which can be found here: https://github.com/SmartMaaS-Services/dev.smartmaas.services.
+
+### Setup script #2 ###
+
+Run the second script which will create Umbrella Website backends, Keyrock applications and roles. It also configures and deploys the remaining services of the platform. The following options are supported:
+
+<pre>
+<i>Mandatory options:</i>  
+<b>--domain</b>             domain name (MUST be the same value as in first setup script!) 
+<b>--api-key</b>            API Key of the first created Umbrella user  
+<b>--token</b>              Admin API Token of the first created Umbrella admin  
+<b>--stack</b>              stack name for the Docker Swarm - can be chosen freely and will be used as name prefix for Docker container and networks (MUST be the same value as in first setup script!) 
+
+<i>Optional options:</i>  
+<b>--bae-paypal-id</b>      PayPal client ID to be used when using PayPal as payment gateway in BAE Marketplace  
+<b>--bae-paypal-secret</b>  PayPal client secret  
+<b>--version</b>            prints out the script's version  
+<b>--help</b>               prints out usage information and these options
+</pre>
+
+> <i>NOTE:</i> Options `--domain` and `--stack` must have assigned the same values as in first setup script. Omitting the `--bae-paypal*` options will disable marketplace payments. Also don't forget about the single quotes ('') here.
+
+
+#### GET data ####
+
+Now to query the created entity with the same user, we send a GET request to the Orion v2, again specifying the `Fiware-Service` and the `Authorization` header as before:
+
+```js
+curl --location --request GET 'https://context.example.org/v2/entities?id=DHT22_8892' \
+--header 'Fiware-Service: exampleinc' \
+--header 'Authorization: Bearer 4543a954065073f235e776861e3d96bd8a8b49e3'
+```
+
+On success, the server should reply with a `200 OK` and contain the requested entity object in the HTTP body:
+
+```js
+[
+    {
+        "id": "DHT22_8892",
+        "type": "WeatherObserved",
+        "dateObserved": {
+            "type": "DateTime",
+            "value": "2021-03-30T08:43:04.00Z",
+            "metadata": {}
+        },
+        "location": {
+            "type": "geo:json",
+            "value": {
+                "type": "Point",
+                "coordinates": [
+                    10.118,
+                    54.332
+                ]
+            },
+            "metadata": {}
+        },
+        "refDevice": {
+            "type": "Relationship",
+            "value": "Device_4482",
+            "metadata": {}
+        },
+        "relativeHumidity": {
+            "type": "Number",
+            "value": 0.999,
+            "metadata": {}
+        },
+        "stationName": {
+            "type": "Text",
+            "value": "DHT22_8892",
+            "metadata": {}
+        },
+        "temperature": {
+            "type": "Number",
+            "value": 7.6,
+            "metadata": {}
+        }
+    }
+]
+```
+
+
+
+Example:
+```bash
+./scripts/setup-part2.sh --domain 'example.org' --api-key 'GKix62HPfoCtGyAV2CXTte4JvWrjvFJZwVl7e9EO' --token 'tUWTKOqbFDvgnA2oZgsxHQDk6j1G5se86aTYBrcS' --bae-paypal-id 'mOh69Fg852kXlY7vhkki62jTFlu7Nwbt' --bae-paypal-secret 'JpOrhdL7HXN6SP5Ve9uYup26iHeaSpYG' --stack 'swarm-test-stack'
+```
+
+### Maxmind license ###
+
+APInf Umbrella needs a Maxmind License in order to use GeoIP location information. Please request your own free license key at [Maxmind](https://www.maxmind.com/en/request-service-trial?service_geoip=1).
+
+> <i>NOTE:</i> This step is very important, because the APInf Umbrella installation will not work - to be exact, the docker service would not even start up without a valid Maxmind license!
+  
+<p align="center">
+	<img src="docs/img/setup/maxmind/maxmind_request_service_trial.png" alt="Image of sign-up page for free Maxmind service trial" width="80%">
+</p>
+
+
+
+
+```yaml
+tutorial:
+    image: fiware/tutorials.ngsi-ld
+    hostname: iot-sensors
+    container_name: fiware-tutorial
+    networks:
+        - default
+    expose:
+        - "3000"
+        - "3001"
+    ports:
+        - "3000:3000"
+        - "3001:3001"
+    environment:
+        - "DEBUG=tutorial:*"
+        - "PORT=3000"
+        - "IOTA_HTTP_HOST=iot-agent"
+        - "IOTA_HTTP_PORT=7896"
+        - "DUMMY_DEVICES_PORT=3001" # Port used by the dummy IOT devices to receive commands
+        - "DUMMY_DEVICES_API_KEY=4jggokgpepnvsb2uv4s40d59ov"
+```
+
+The `tutorial` container is driven by environment variables as shown:
+
+| Key                   | Value                        | Description                                                                                                                                                                        |
+| --------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| DEBUG                 | `tutorial:*`                 | Debug flag used for logging                                                                                                                                                        |
+| WEB_APP_PORT          | `3000`                       | Port used by web-app which displays the dummy device data                                                                                                                          |
+| IOTA_HTTP_HOST        | `iot-agent`                  | The hostname of the missing IoT Agent - used in a later tutorial                                                                                                                   |
+| IOTA_HTTP_PORT        | `7896`                       | The port that the missing IoT Agent will be listening on. `7896` is a common default for UltraLight over HTTP                                                                      |
+| DUMMY_DEVICES_PORT    | `3001`                       | Port used by the dummy IoT devices to receive commands                                                                                                                             |
+| DUMMY_DEVICES_API_KEY | `4jggokgpepnvsb2uv4s40d59ov` | Random security key used for UltraLight interactions - this will be used in a later tutorial to ensure the integrity of interactions between the devices and the missing IoT Agent |
+
+The other `tutorial` container configuration values described in the YAML file are not used in this tutorial.
 
 ## How to Deploy?
 
@@ -66,6 +225,29 @@ contexts, we use it here to mean the automated and managed flow of information b
 
 | :books: [Documentation](https://fiware-draco.rtfd.io) | :mortar_board: [Academy](https://fiware-academy.readthedocs.io/en/latest/core/draco) | :whale: [Docker Hub](https://hub.docker.com/r/ging/fiware-draco) | :dart: [Roadmap](docs/roadmap.md) |
 | ----------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------- | --------------------------------- |
+
+```console
+docker-compose -v
+docker version
+```
+
+#### :one: Request:
+
+## Docker
+
+To keep things simple all components will be run using [Docker](https://www.docker.com). **Docker** is a container
+technology which allows to different components isolated into their respective environments.
+
+-   To install Docker on Windows follow the instructions [here](https://docs.docker.com/docker-for-windows/)
+-   To install Docker on Mac follow the instructions [here](https://docs.docker.com/docker-for-mac/)
+-   To install Docker on Linux follow the instructions [here](https://docs.docker.com/install/)
+
+**Docker Compose** is a tool for defining and running multi-container Docker applications. A
+[YAML file](https://raw.githubusercontent.com/FIWARE/tutorials.IoT-Sensors/NGSI-LD/docker-compose.yml) is used configure
+the required services for the application. This means all container services can be brought up in a single command.
+Docker Compose is installed by default as part of Docker for Windows and Docker for Mac, however Linux users will need
+to follow the instructions found [here](https://docs.docker.com/compose/install/)
+
 
 ## Why use Draco?
 
@@ -189,6 +371,17 @@ The list of features that are planned for the subsequent release are available i
 
 [@anmunoz](https://github.com/anmunoz).
 
+
+Next Steps
+Want to learn how to add more complexity to your application by adding advanced features? You can find out by reading the other tutorials in this series
+
+License
+MIT © 2020 FIWARE Foundation e.V.
+
+![](https://fiware.github.io/tutorials.IoT-Sensors/img/device-measures.png)
+
+Once the door is locked, no further customers may enter. The Motion Sensor will report no further movement detected, the Smart Door cannot be opened manually and the Smart Lamp will slowly return to the ambient lighting level.
+
 ## Licensing
 
 Draco Except as otherwise noted this software is licensed under the Apache License, Version 2.0 Licensed under the
@@ -203,6 +396,16 @@ limitations under the License.
 Any doubt you may have, please refer to the
 [Draco Core Team](docs/installation_and_administration_guide/issues_and_contact.md).
 
+## Contribution ##
+
+Pull requests are welcome. Please make sure to update tests as appropriate.
+Git conventions are being followed and changes go to development only from feature/bugfix branches.
+
+## License ##
+
+Smart-Platform-Services is licensed under Affero General Public License (GPL) version 3.
+
+© 2020-2021 FIWARE Foundation
 
 
 ## License
