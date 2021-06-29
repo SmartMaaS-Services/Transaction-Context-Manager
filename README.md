@@ -38,6 +38,21 @@ contexts, we use it here to mean the automated and managed flow of information b
 | :books: [Documentation](https://fiware-draco.rtfd.io) | :mortar_board: [Academy](https://fiware-academy.readthedocs.io/en/latest/core/draco) | :whale: [Docker Hub](https://hub.docker.com/r/ging/fiware-draco) | :dart: [Roadmap](docs/roadmap.md) |
 | ----------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------- | --------------------------------- |
 
+## Why use Draco?
+
+Draco is designed to run specific set of processors and templates for persistence context data to multiple sinks.
+
+Current stable release is able to persist the following sources of data in the following third-party storages:
+
+-   NGSI-like context data in:
+    -   [MySQL](https://www.mysql.com/), the well-known relational database manager.
+    -   [MongoDB](https://www.mongodb.org/), the NoSQL document-oriented database.
+    -   [PostgreSQL](http://www.postgresql.org/), the well-known relational database manager.
+    -   [Cassandra](http://cassandra.apache.org/), Distributed database.
+    -   [Carto](https://carto.com/), for geospatial Data
+    -   [HDFS](https://hadoop.apache.org), High Distributed filesystem.
+    -   [DynamoDB](https://aws.amazon.com/es/dynamodb/), A cloud key-value Amazon DB. 
+
 
 
 ***
