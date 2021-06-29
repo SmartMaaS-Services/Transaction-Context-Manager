@@ -124,5 +124,68 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 </details>
 
 
+## Usage: Overview
+
+The best way to start with Draco is following the **Quick Start Guide** found at readthedocs.org and it provides a good
+documentation summary ([Draco](docs/quick_start_guide.md)).
+
+Nevertheless, both the **Installation and Administration Guide** also found at
+[readthedocs.org](docs/installation_and_administration_guide/README.md) cover more advanced topics.
+
+The **Processors Catalogue** completes the available documentation for Draco
+([Draco](docs/processors_catalogue/README.md)).
+
+## Training courses
+
+### Academy Courses
+
+Some lessons on Draco Fundamentals will be offered soon in the
+[FIWARE Academy](https://fiware-academy.readthedocs.io/en/latest) .
+
+### Examples
+
+Several examples are provided to facilitate getting started with GE. They are hosted in the official documentation at
+[Read the Docs](https://fiware-draco.readthedocs.io/en/latest/quick_start_guide/index.html).
+
+## Testing
+
+In order to test the code:
+
+    $mvn clean test -Dtest=Test* cobertura:cobertura coveralls:report -Padd-dependencies-for-IDEA
+
+## Quality Assurance
+
+This project is part of FIWARE and has been rated as follows:
+
+-   **Version Tested:** TBD
+-   **Documentation:** TBD
+-   **Responsiveness:** TBD
+-   **FIWARE Testing:** TBD
+
+## Roadmap
+
+The list of features that are planned for the subsequent release are available in the
+[ROADMAP](https://github.com/ging/fiware-draco/blob/develop/docs/roadmap.md) file.
+
+## Maintainers
+
+[@anmunoz](https://github.com/anmunoz).
+
+## Licensing
+
+Draco Except as otherwise noted this software is licensed under the Apache License, Version 2.0 Licensed under the
+Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may
+obtain a copy of the License at `http://www.apache.org/licenses/LICENSE-2.0` Unless required by applicable law or agreed
+to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and
+limitations under the License.
+
+## Reporting issues and contact information
+
+Any doubt you may have, please refer to the
+[Draco Core Team](docs/installation_and_administration_guide/issues_and_contact.md).
+
+
+
 ## License
 Copyright © 2020 Fraunhofer ISST. This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) for details.
