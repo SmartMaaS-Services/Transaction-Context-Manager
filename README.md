@@ -6,8 +6,6 @@
   <br>
 </h1>
 
-<img src="docs/images/Header.jpeg">
-
 <p align="center">
   <a href="mailto:info@dataspace-connector.de">Contact</a> •
   <a href="#contributing">Contribute</a> •
