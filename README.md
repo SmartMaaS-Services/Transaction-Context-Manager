@@ -1,11 +1,11 @@
-<h1 align="center">
+<h2 align="center">
   <a href="https://smart-maas.eu/en/"><img src="https://github.com/SmartMaaS-Services/Transaction-Context-Manager/blob/main/docs/images/Header.jpeg" alt="Smart MaaS" width="500"></a>
   <br>
       SMART MOBILITY SERVICE PLATFORM
   <br>
   <a href="https://smart-maas.eu/en/"><img src="https://github.com/SmartMaaS-Services/Transaction-Context-Manager/blob/main/docs/images/Logos-Smart-MaaS.png" alt="Smart MaaS" width="250"></a>
   <br>
-</h1>
+</h2>
 
 <p align="center">
   <a href="mailto:info@smart-maas.eu">Contact</a> •
@@ -16,11 +16,11 @@
 
 ***
 
-<h2 align="center">
+<h1 align="center">
   <a>
     Transaction Context Manager
   </a>
-</h3>
+</h1>
 
 <details>
 <summary><strong>Table of Contents</strong></summary>
