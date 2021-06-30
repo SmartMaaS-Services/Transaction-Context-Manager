@@ -1,17 +1,16 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/SmartMaaS-Services/Transaction-Context-Manager/blob/main/docs/images/Header.jpeg"><img src="https://github.com/SmartMaaS-Services/Transaction-Context-Manager/blob/main/docs/images/Header.jpeg" alt="SmartMaaS Header" width="500"></a>
+  <a href="https://smart-maas.eu/en/"><img src="https://github.com/SmartMaaS-Services/Transaction-Context-Manager/blob/main/docs/images/Header.jpeg" alt="Smart MaaS" width="500"></a>
+  <a href="https://smart-maas.eu/en/"><img src="https://github.com/SmartMaaS-Services/Transaction-Context-Manager/blob/main/docs/images/Logos-Smart-MaaS.png" alt="Smart MaaS" width="250"></a>
   <br>
-      Dataspace Connector
+      SMART MOBILITY SERVICE PLATFORM
   <br>
 </h1>
 
 <p align="center">
-  <a href="mailto:info@dataspace-connector.de">Contact</a> •
-  <a href="#contributing">Contribute</a> •
-  <a href="https://international-data-spaces-association.github.io/DataspaceConnector/">Docs</a> •
-  <a href="https://github.com/International-Data-Spaces-Association/DataspaceConnector/issues">Issues</a> •
-  <a href="#license">License</a>
+  <a href="mailto:info@smart-maas.eu">Contact</a> •
+  <a href="https://github.com/SmartMaaS-Services/Transaction-Context-Manager/issues">Issues</a> •
+  <a href="https://smart-maas.eu/en/">Project Page</a>
 </p>
 
 
