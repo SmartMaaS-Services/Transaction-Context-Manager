@@ -16,7 +16,7 @@
 
 ***
 
-<h2 align="left" >
+<h2 align="center">
   <a>
     Transaction Context Manager
   </a>
