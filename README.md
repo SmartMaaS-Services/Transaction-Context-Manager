@@ -5,7 +5,6 @@
   <br>
       SMART MOBILITY SERVICE PLATFORM
   <br>
-  <br>
   <a href="https://smart-maas.eu/en/"><img src="https://github.com/SmartMaaS-Services/Transaction-Context-Manager/blob/main/docs/images/Logos-Smart-MaaS.png" alt="Smart MaaS" width="250"></a>
   <br>
   <br>
