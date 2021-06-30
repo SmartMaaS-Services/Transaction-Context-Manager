@@ -17,8 +17,8 @@
 ***
 
 <h3 align="center" >
-  <a href="https://international-data-spaces-association.github.io/DataspaceConnector/">
-    Manual & Documentation
+  <a>
+    Transaction Context Manager
   </a>
 </h3>
 
