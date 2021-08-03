@@ -1,0 +1,77 @@
+# WARNING: Do not deploy this demonstration configuration directly to a production environment
+#
+# The tutorial docker-compose files have not been written for production deployment and will not
+# scale.
+
+# A proper and secure architecture has been sacrificed to keep the narrative focused on the learning
+# goals to work with the Transaction Context Manager. It is intended to deploy everything onto a single Docker machine.
+# All components have ports exposed to allow for direct calls to services.
+#
+# They also contain various obvious security flaws - passwords in plain text, no load balancing,
+# no use of HTTPS and so on.
+#
+# This is all to avoid the need of multiple machines, generating certificates, encrypting secrets
+# and so on, purely so that a single docker-compose file can be read as an example to build on,
+# not use directly. This is to enable the quick and easy understanding of the operation.
+#
+
+version: "3"
+
+services:
+
+  mongo:
+    image: mongo:4.4
+    hostname: mongo
+    command: --nojournal
+
+  orion:
+    image: fiware/orion-ld:0.8-PRE-267
+    hostname: orion
+    ports:
+      - "1026:1026"
+    depends_on:
+      - mongo
+    command: -dbhost mongo
+
+  nifi:
+    image: apache/nifi:1.13.2
+    hostname: nifi
+    ports:
+      - "8082:8080"
+      - "8081:8081"
+
+  killbill:
+    image: killbill/killbill:0.22.25
+    hostname: killbill
+    ports:
+      - "8080:8080"
+      - "8000:8000"
+      - "12345:12345"
+    environment:
+      - KILLBILL_DAO_URL=jdbc:mysql://db:3306/killbill
+      - KILLBILL_DAO_USER=root
+      - KILLBILL_DAO_PASSWORD=killbill
+      - KILLBILL_METRICS_INFLUXDB=false
+      - KILLBILL_METRICS_INFLUXDB_HOST=host.docker.internal
+      - KILLBILL_METRICS_INFLUXDB_PORT=8086
+
+  kaui:
+    image: killbill/kaui:2.0.8
+    hostname: kaui
+    ports:
+      - "9090:8080"
+    environment:
+      - KAUI_CONFIG_DAO_URL=jdbc:mysql://db:3306/kaui
+      - KAUI_CONFIG_DAO_USER=root
+      - KAUI_CONFIG_DAO_PASSWORD=killbill
+      - KAUI_KILLBILL_URL=http://killbill:8080
+      - KAUI_KILLBILL_API_KEY=bob
+      - KAUI_KILLBILL_API_SECRET=lazar
+
+  db:
+    image: killbill/mariadb:0.22
+    hostname: db
+    expose:
+      - "3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=killbill
