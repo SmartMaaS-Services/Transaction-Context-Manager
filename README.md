@@ -22,8 +22,6 @@
   </a>
 </h1>
 
-The description of the Transaction Context Manager is under final review and will be published until 5th July. 
-
 It is a generic building block to process data from a big variety of datasources and processing frameworks on a transaction basis. It offers a new interaction pattern that offers new ways of data processing, brokering and marketing.
 
 The Smart MaaS demo applications are alreay published and available in the file https://github.com/SmartMaaS-Services/Transaction-Context-Manager/blob/main/Transaction-Context-Manager.xml here in the repo. It is a Apache Nifi template that is ready for usage and it contains integrates parts of 
